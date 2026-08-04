@@ -1,0 +1,6 @@
+{
+  "name": "Quotes-OftheDay- by abie",
+  "description": "A mobile-native iOS Cupertino styled studio to create, customize, and export high-res quote graphics and street graffiti art by abie.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
