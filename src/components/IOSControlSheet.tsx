@@ -93,17 +93,20 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
   };
 
   return (
-    <div className="w-full bg-white/95 backdrop-blur-xl border-t border-[#E5E5EA] shadow-xl transition-all pb-safe">
+    <div className="w-full bg-white/95 dark:bg-[#1C1C1E]/95 backdrop-blur-2xl border-t border-[#E5E5EA] dark:border-[#2C2C2E] shadow-2xl transition-all pb-safe rounded-t-[28px] sm:rounded-t-[36px]">
       
+      {/* iOS Cupertino Grab Handle Indicator */}
+      <div className="w-9 h-1 rounded-full bg-gray-300 dark:bg-gray-600 mx-auto mt-2.5 mb-1 cursor-grab" />
+
       {/* iOS Cupertino Segmented Tab Bar */}
-      <div className="max-w-4xl mx-auto px-2 pt-2.5 pb-1">
-        <div className="flex items-center justify-around bg-[#E5E5EA]/70 p-1 rounded-2xl border border-black/5 shadow-inner">
+      <div className="max-w-4xl mx-auto px-2 pt-1 pb-1">
+        <div className="flex items-center justify-around bg-[#767680]/12 dark:bg-[#767680]/24 p-1 rounded-2xl border border-black/5 dark:border-white/5 shadow-inner">
           <button
             onClick={() => onTabChange('template')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex-1 ${
               activeTab === 'template'
-                ? 'bg-white text-[#1C1C1E] shadow-sm ring-1 ring-black/5'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-white dark:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10'
+                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
             }`}
           >
             <Layout className="w-4 h-4" />
@@ -114,8 +117,8 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
             onClick={() => onTabChange('text')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex-1 ${
               activeTab === 'text'
-                ? 'bg-white text-[#1C1C1E] shadow-sm ring-1 ring-black/5'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-white dark:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10'
+                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
             }`}
           >
             <Type className="w-4 h-4" />
@@ -126,8 +129,8 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
             onClick={() => onTabChange('background')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex-1 ${
               activeTab === 'background'
-                ? 'bg-white text-[#1C1C1E] shadow-sm ring-1 ring-black/5'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-white dark:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10'
+                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
             }`}
           >
             <Palette className="w-4 h-4" />
@@ -138,8 +141,8 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
             onClick={() => onTabChange('filter')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex-1 ${
               activeTab === 'filter'
-                ? 'bg-white text-[#1C1C1E] shadow-sm ring-1 ring-black/5'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-white dark:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10'
+                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
             }`}
           >
             <Wand2 className="w-4 h-4" />
@@ -150,8 +153,8 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
             onClick={() => onTabChange('sticker')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex-1 ${
               activeTab === 'sticker'
-                ? 'bg-white text-[#1C1C1E] shadow-sm ring-1 ring-black/5'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-white dark:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10'
+                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
             }`}
           >
             <Smile className="w-4 h-4" />

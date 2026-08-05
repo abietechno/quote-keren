@@ -20,6 +20,8 @@ export default function App() {
   // App States
   const [aspectRatio, setAspectRatio] = useState<AspectRatio>('1:1');
   const [activeTab, setActiveTab] = useState<'template' | 'text' | 'background' | 'filter' | 'sticker'>('template');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDeviceFrame, setIsDeviceFrame] = useState(true);
 
   // Initial State loaded from default template (Graffiti Street Wall)
   const defaultTemplate = TEMPLATE_PRESETS[0];
@@ -167,7 +169,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F2F2F7] text-[#1C1C1E] flex flex-col font-['Plus_Jakarta_Sans'] select-none overflow-x-hidden">
+    <div className={`${isDarkMode ? 'dark bg-[#000000] text-white' : 'bg-[#F2F2F7] text-[#1C1C1E]'} min-h-screen flex flex-col font-['Plus_Jakarta_Sans'] select-none overflow-x-hidden transition-colors duration-300`}>
       
       {/* iOS Cupertino Header */}
       <Header
@@ -175,6 +177,10 @@ export default function App() {
         onAspectRatioChange={setAspectRatio}
         onReset={handleResetCanvas}
         onExport={() => setIsExportModalOpen(true)}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
+        isDeviceFrame={isDeviceFrame}
+        onToggleDeviceFrame={() => setIsDeviceFrame((prev) => !prev)}
       />
 
       {/* Main Studio Work Area */}
@@ -197,6 +203,7 @@ export default function App() {
           onDeleteText={handleDeleteText}
           onDeleteSticker={handleDeleteSticker}
           onEditTextContent={handleOpenTextModal}
+          isDeviceFrame={isDeviceFrame}
         />
 
       </main>

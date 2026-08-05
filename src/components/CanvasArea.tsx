@@ -19,6 +19,7 @@ interface CanvasAreaProps {
   onDeleteText: (id: string) => void;
   onDeleteSticker: (id: string) => void;
   onEditTextContent: (textLayer: TextLayer) => void;
+  isDeviceFrame?: boolean;
 }
 
 export const CanvasArea: React.FC<CanvasAreaProps> = ({
@@ -37,6 +38,7 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
   onDeleteText,
   onDeleteSticker,
   onEditTextContent,
+  isDeviceFrame = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -223,18 +225,42 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-3 sm:p-6 overflow-hidden select-none">
-      {/* Aspect Ratio Canvas Wrapper */}
+    <div className="w-full flex flex-col items-center justify-center p-2 sm:p-5 overflow-hidden select-none">
+      {/* Optional iPhone 16 Pro Device Mockup Frame */}
       <div
-        ref={canvasRef}
-        id="quote-canvas-node"
-        className={`relative w-full ${getAspectRatioStyle()} rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 transition-all duration-300 ${filterClass}`}
-        style={renderBackgroundStyle()}
-        onClick={() => {
-          onSelectText(null);
-          onSelectSticker(null);
-        }}
+        className={`relative flex items-center justify-center transition-all duration-300 ${
+          isDeviceFrame
+            ? 'p-3 sm:p-4 bg-gradient-to-b from-[#2C2C2E] via-[#1C1C1E] to-[#0A0A0C] rounded-[44px] sm:rounded-[52px] shadow-[0_25px_60px_rgba(0,0,0,0.4)] ring-1 ring-white/20 border-4 border-[#3A3A3C]'
+            : ''
+        }`}
       >
+        {/* Dynamic Island Pill & iOS Status Bar when Device Frame is ON */}
+        {isDeviceFrame && (
+          <>
+            {/* Dynamic Island */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-24 h-5 sm:w-28 sm:h-6 bg-black rounded-full flex items-center justify-between px-2 shadow-inner border border-white/10">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#1C1C1E] ring-1 ring-white/10" />
+              <div className="w-2.5 h-2.5 rounded-full bg-blue-950/80 ring-1 ring-blue-500/30 flex items-center justify-center">
+                <div className="w-1 h-1 rounded-full bg-blue-400" />
+              </div>
+            </div>
+
+            {/* iOS Home Bar at Bottom */}
+            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-30 w-32 h-1 bg-white/60 rounded-full" />
+          </>
+        )}
+
+        {/* Aspect Ratio Canvas Wrapper */}
+        <div
+          ref={canvasRef}
+          id="quote-canvas-node"
+          className={`relative w-full ${getAspectRatioStyle()} rounded-2xl shadow-2xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 transition-all duration-300 ${filterClass}`}
+          style={renderBackgroundStyle()}
+          onClick={() => {
+            onSelectText(null);
+            onSelectSticker(null);
+          }}
+        >
         {/* Container for drag pointer coordinates */}
         <div ref={containerRef} className="absolute inset-0 w-full h-full">
           
@@ -418,6 +444,7 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
           </div>
 
         </div>
+      </div>
       </div>
     </div>
   );

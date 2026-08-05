@@ -114,27 +114,27 @@ export const ExportModal: React.FC<ExportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md p-4 animate-fade-in">
-      <div className="w-full max-w-md bg-white border border-[#E5E5EA] rounded-3xl shadow-2xl overflow-hidden p-5 space-y-4 text-[#1C1C1E]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 animate-fade-in">
+      <div className="w-full max-w-md bg-white dark:bg-[#1C1C1E] border border-[#E5E5EA] dark:border-[#2C2C2E] rounded-3xl shadow-2xl overflow-hidden p-5 space-y-4 text-[#1C1C1E] dark:text-white">
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-2 border-b border-gray-200">
+        <div className="flex items-center justify-between pb-2 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[#007AFF]" />
-            <h2 className="text-base font-bold text-[#1C1C1E]">Hasil Ekspor Gambar</h2>
+            <h2 className="text-base font-bold text-[#1C1C1E] dark:text-white">Hasil Ekspor Gambar</h2>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:text-black hover:bg-gray-200 flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full bg-gray-100 dark:bg-[#2C2C2E] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-200 flex items-center justify-center transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Preview Container */}
-        <div className="relative w-full min-h-[220px] max-h-[320px] bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden border border-gray-200 p-2">
+        <div className="relative w-full min-h-[220px] max-h-[320px] bg-gray-100 dark:bg-[#2C2C2E] rounded-2xl flex items-center justify-center overflow-hidden border border-gray-200 dark:border-gray-700 p-2">
           {exporting && !previewUrl ? (
-            <div className="flex flex-col items-center gap-2 text-gray-500">
+            <div className="flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400">
               <div className="w-6 h-6 border-2 border-[#007AFF] border-t-transparent rounded-full animate-spin" />
               <span className="text-xs font-semibold">Memproses Gambar High-Res...</span>
             </div>
@@ -175,16 +175,16 @@ export const ExportModal: React.FC<ExportModalProps> = ({
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={handleCopyClipboard}
-              className="py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95"
+              className="py-2.5 rounded-xl bg-gray-100 dark:bg-[#2C2C2E] hover:bg-gray-200 dark:hover:bg-[#3A3A3C] text-gray-800 dark:text-gray-200 text-xs font-bold flex items-center justify-center gap-1.5 border border-gray-200 dark:border-gray-700 transition-all active:scale-95"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="w-3.5 h-3.5 text-emerald-500" />
                   <span>Tersalin!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5 text-gray-500" />
+                  <Copy className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
                   <span>Salin Gambar</span>
                 </>
               )}
@@ -192,9 +192,9 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
             <button
               onClick={handleShare}
-              className="py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95"
+              className="py-2.5 rounded-xl bg-gray-100 dark:bg-[#2C2C2E] hover:bg-gray-200 dark:hover:bg-[#3A3A3C] text-gray-800 dark:text-gray-200 text-xs font-bold flex items-center justify-center gap-1.5 border border-gray-200 dark:border-gray-700 transition-all active:scale-95"
             >
-              <Share2 className="w-3.5 h-3.5 text-gray-500" />
+              <Share2 className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
               <span>Bagikan</span>
             </button>
           </div>

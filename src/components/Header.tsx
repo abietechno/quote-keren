@@ -1,12 +1,16 @@
 import React from 'react';
 import { AspectRatio } from '../types';
-import { Download, RotateCcw, Sparkles, Smartphone, Square, RectangleVertical, Monitor } from 'lucide-react';
+import { Download, RotateCcw, Sparkles, Smartphone, Square, RectangleVertical, Monitor, Moon, Sun, SmartphoneNfc } from 'lucide-react';
 
 interface HeaderProps {
   aspectRatio: AspectRatio;
   onAspectRatioChange: (ratio: AspectRatio) => void;
   onReset: () => void;
   onExport: () => void;
+  isDarkMode: boolean;
+  onToggleDarkMode: () => void;
+  isDeviceFrame: boolean;
+  onToggleDeviceFrame: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,6 +18,10 @@ export const Header: React.FC<HeaderProps> = ({
   onAspectRatioChange,
   onReset,
   onExport,
+  isDarkMode,
+  onToggleDarkMode,
+  isDeviceFrame,
+  onToggleDeviceFrame,
 }) => {
   const aspectRatios: { id: AspectRatio; label: string; icon: React.ReactNode }[] = [
     { id: '1:1', label: '1:1', icon: <Square className="w-3.5 h-3.5" /> },
@@ -24,33 +32,33 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur-md border-b border-[#E5E5EA] px-3 py-2.5 sm:px-6">
+    <header className="sticky top-0 z-30 w-full bg-white/80 dark:bg-[#1C1C1E]/80 backdrop-blur-xl border-b border-[#E5E5EA] dark:border-[#2C2C2E] px-3 py-2.5 sm:px-6 transition-colors">
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
         {/* Brand Logo */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 flex items-center justify-center shadow-md shadow-blue-500/20 ring-1 ring-black/5">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-[#007AFF] via-indigo-500 to-sky-400 flex items-center justify-center shadow-md shadow-blue-500/20 ring-1 ring-black/5 dark:ring-white/10">
             <Sparkles className="w-4 h-4 text-white animate-pulse" />
           </div>
           <div>
-            <h1 className="text-base sm:text-lg font-extrabold tracking-tight text-[#1C1C1E] font-['Plus_Jakarta_Sans']">
+            <h1 className="text-base sm:text-lg font-extrabold tracking-tight text-[#1C1C1E] dark:text-white font-['Plus_Jakarta_Sans'] leading-none">
               Quotes-OftheDay-
             </h1>
-            <span className="text-[10px] text-blue-600 font-semibold tracking-wider uppercase block -mt-1">
+            <span className="text-[10px] text-[#007AFF] dark:text-sky-400 font-semibold tracking-wider uppercase block mt-0.5">
               by abie
             </span>
           </div>
         </div>
 
         {/* Aspect Ratio Picker (Segmented Control) */}
-        <div className="hidden md:flex items-center bg-[#E5E5EA]/70 p-1 rounded-xl border border-black/5 shadow-inner">
+        <div className="hidden md:flex items-center bg-[#E5E5EA]/70 dark:bg-[#2C2C2E]/80 p-1 rounded-2xl border border-black/5 dark:border-white/5 shadow-inner">
           {aspectRatios.map((ratio) => (
             <button
               key={ratio.id}
               onClick={() => onAspectRatioChange(ratio.id)}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-200 ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 aspectRatio === ratio.id
-                  ? 'bg-white text-[#1C1C1E] shadow-sm font-bold'
-                  : 'text-gray-600 hover:text-black hover:bg-black/5'
+                  ? 'bg-white dark:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white shadow-sm font-bold'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
               }`}
             >
               {ratio.icon}
@@ -59,17 +67,42 @@ export const Header: React.FC<HeaderProps> = ({
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-2">
+        {/* Action Controls & Utilities */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* iOS Device Frame Mockup Toggle */}
+          <button
+            onClick={onToggleDeviceFrame}
+            title={isDeviceFrame ? "Tampilan Polos" : "Frame iPhone iOS"}
+            className={`p-2 rounded-xl border transition-all text-xs font-medium flex items-center gap-1 active:scale-95 ${
+              isDeviceFrame
+                ? 'bg-[#007AFF] text-white border-[#007AFF] shadow-sm'
+                : 'bg-gray-100 dark:bg-[#2C2C2E] text-gray-700 dark:text-gray-300 border-gray-200 dark:border-[#3A3A3C] hover:bg-gray-200 dark:hover:bg-[#3A3A3C]'
+            }`}
+          >
+            <SmartphoneNfc className="w-4 h-4" />
+            <span className="hidden lg:inline">{isDeviceFrame ? 'Frame ON' : 'Frame OFF'}</span>
+          </button>
+
+          {/* iOS Theme Switch (Dark/Light) */}
+          <button
+            onClick={onToggleDarkMode}
+            title={isDarkMode ? "Switch to iOS Light Mode" : "Switch to iOS Dark Mode"}
+            className="p-2 rounded-xl bg-gray-100 dark:bg-[#2C2C2E] hover:bg-gray-200 dark:hover:bg-[#3A3A3C] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-[#3A3A3C] transition-all text-xs font-medium flex items-center gap-1 active:scale-95"
+          >
+            {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
+          </button>
+
+          {/* Reset Button */}
           <button
             onClick={onReset}
             title="Reset Kanvas"
-            className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200 transition-all text-xs font-medium flex items-center gap-1.5 active:scale-95"
+            className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-gray-100 dark:bg-[#2C2C2E] hover:bg-gray-200 dark:hover:bg-[#3A3A3C] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-[#3A3A3C] transition-all text-xs font-medium flex items-center gap-1.5 active:scale-95"
           >
-            <RotateCcw className="w-4 h-4 text-gray-500" />
+            <RotateCcw className="w-4 h-4 text-gray-500 dark:text-gray-400" />
             <span className="hidden sm:inline">Reset</span>
           </button>
 
+          {/* Export Button */}
           <button
             onClick={onExport}
             className="px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-[#007AFF] hover:bg-blue-600 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-blue-500/20 active:scale-95 transition-all"
@@ -81,16 +114,16 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Mobile Aspect Ratio Selector (Scrollable Strip) */}
-      <div className="flex md:hidden items-center justify-center gap-1.5 mt-2 pt-2 border-t border-gray-200/60 overflow-x-auto no-scrollbar pb-0.5">
-        <span className="text-[11px] text-gray-500 font-medium mr-1 flex-shrink-0">Rasio:</span>
+      <div className="flex md:hidden items-center justify-center gap-1.5 mt-2 pt-2 border-t border-gray-200/60 dark:border-gray-800/80 overflow-x-auto no-scrollbar pb-0.5">
+        <span className="text-[11px] text-gray-500 dark:text-gray-400 font-medium mr-1 flex-shrink-0">Rasio:</span>
         {aspectRatios.map((ratio) => (
           <button
             key={ratio.id}
             onClick={() => onAspectRatioChange(ratio.id)}
-            className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all flex-shrink-0 ${
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all flex-shrink-0 ${
               aspectRatio === ratio.id
                 ? 'bg-[#007AFF] text-white shadow-sm'
-                : 'bg-gray-100 text-gray-600 border border-gray-200'
+                : 'bg-gray-100 dark:bg-[#2C2C2E] text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-[#3A3A3C]'
             }`}
           >
             {ratio.icon}
@@ -101,3 +134,4 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
+
