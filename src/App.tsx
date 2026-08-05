@@ -224,7 +224,7 @@ export default function App() {
           setBackground({
             type: bg.type,
             value: bg.value,
-            overlayOpacity: bg.overlayOpacity || 0,
+            overlayOpacity: bg.overlayOpacity !== undefined ? bg.overlayOpacity : 0,
             overlayColor: bg.overlayColor || '#000000',
             blur: 0,
           })

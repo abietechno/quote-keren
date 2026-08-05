@@ -209,16 +209,24 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
   // Render background style dynamically
   const renderBackgroundStyle = (): React.CSSProperties => {
     if (background.type === 'solid') {
-      return { backgroundColor: background.value };
+      return {
+        backgroundColor: background.value,
+        backgroundImage: 'none',
+      };
     }
     if (background.type === 'gradient' || background.type === 'texture') {
-      return { background: background.value };
+      return {
+        backgroundImage: background.value,
+        backgroundSize: 'cover',
+      };
     }
     if (background.type === 'unsplash' || background.type === 'image') {
       return {
-        backgroundImage: `url(${background.value})`,
+        backgroundColor: '#1c1c1e',
+        backgroundImage: `url("${background.value}")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       };
     }
     return { backgroundColor: '#0a0a0c' };
@@ -228,7 +236,7 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
     <div className="w-full flex flex-col items-center justify-center p-2 sm:p-5 overflow-hidden select-none">
       {/* Optional iPhone 16 Pro Device Mockup Frame */}
       <div
-        className={`relative flex items-center justify-center transition-all duration-300 ${
+        className={`relative w-full max-w-[480px] sm:max-w-[520px] mx-auto flex items-center justify-center transition-all duration-300 ${
           isDeviceFrame
             ? 'p-3 sm:p-4 bg-gradient-to-b from-[#2C2C2E] via-[#1C1C1E] to-[#0A0A0C] rounded-[44px] sm:rounded-[52px] shadow-[0_25px_60px_rgba(0,0,0,0.4)] ring-1 ring-white/20 border-4 border-[#3A3A3C]'
             : ''
@@ -344,7 +352,7 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }
-              : { color: t.color };
+              : { color: t.color || '#ffffff' };
 
             return (
               <div
@@ -354,7 +362,7 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
                   e.stopPropagation();
                   onEditTextContent(t);
                 }}
-                className={`absolute cursor-grab active:cursor-grabbing touch-none select-none group max-w-[90%] transition-shadow ${
+                className={`absolute z-20 cursor-grab active:cursor-grabbing touch-none select-none group max-w-[90%] transition-shadow ${
                   isSelected
                     ? 'ring-2 ring-blue-500 p-2 sm:p-3 rounded-xl bg-blue-500/10 backdrop-blur-[2px] shadow-2xl'
                     : 'p-1 hover:ring-1 hover:ring-slate-400/30 rounded-lg'

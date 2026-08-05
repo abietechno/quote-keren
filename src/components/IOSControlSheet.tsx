@@ -25,6 +25,7 @@ import {
   Sparkles,
   SlidersHorizontal,
   Check,
+  Edit3,
 } from 'lucide-react';
 
 interface IOSControlSheetProps {
@@ -85,12 +86,15 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
           onUpdateBackground({
             type: 'image',
             value: event.target.result as string,
+            overlayOpacity: 0,
           });
         }
       };
       reader.readAsDataURL(file);
     }
   };
+
+  const [bgCategoryFilter, setBgCategoryFilter] = useState<string>('Semua');
 
   return (
     <div className="w-full bg-white/95 dark:bg-[#1C1C1E]/95 backdrop-blur-2xl border-t border-[#E5E5EA] dark:border-[#2C2C2E] shadow-2xl transition-all pb-safe rounded-t-[28px] sm:rounded-t-[36px]">
@@ -232,17 +236,53 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
 
             {selectedText ? (
               <div className="space-y-4">
-                {/* Edit Text Content Button */}
-                <div className="flex items-center justify-between bg-gray-50 p-2.5 rounded-xl border border-gray-200">
-                  <span className="text-xs text-[#1C1C1E] font-semibold truncate max-w-[200px]">
-                    "{selectedText.text || 'Kosong'}"
+                {/* Direct Text Area Input */}
+                <div>
+                  <div className="flex items-center justify-between text-xs text-gray-700 dark:text-gray-300 font-bold mb-1.5">
+                    <label className="flex items-center gap-1.5">
+                      <Edit3 className="w-3.5 h-3.5 text-[#007AFF]" />
+                      <span>Ketik Teks / Quotes DISINI:</span>
+                    </label>
+                    <button
+                      onClick={() => onOpenTextModal(selectedText)}
+                      className="text-[11px] text-[#007AFF] hover:underline font-semibold flex items-center gap-1"
+                    >
+                      <span>Layar Penuh</span>
+                    </button>
+                  </div>
+                  <textarea
+                    rows={2}
+                    value={selectedText.text}
+                    onChange={(e) => onUpdateText(selectedText.id, { text: e.target.value })}
+                    placeholder="Ketik kata-kata motivasi atau quotes kamu di sini..."
+                    className="w-full bg-gray-50 dark:bg-[#2C2C2E] text-[#1C1C1E] dark:text-white placeholder-gray-400 text-xs sm:text-sm p-3 rounded-2xl border border-gray-200 dark:border-gray-700 focus:border-[#007AFF] focus:ring-1 focus:ring-[#007AFF] outline-none resize-none transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Quick Suggestion Quote Chips */}
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-1.5">
+                    💡 Kata-Kata Cepat (Klik untuk Pasang):
                   </span>
-                  <button
-                    onClick={() => onOpenTextModal(selectedText)}
-                    className="px-3 py-1 rounded-lg bg-[#007AFF] hover:bg-blue-600 text-white text-xs font-semibold transition-all active:scale-95"
-                  >
-                    Ubah Kata-kata
-                  </button>
+                  <div className="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                    {[
+                      'Hanya yang berani gagal total, yang bisa meraih sukses besar.',
+                      'Masa depan adalah milik mereka yang percaya pada mimpi.',
+                      'Langkah kecil setiap hari menghasilkan perubahan besar.',
+                      'Nikmati prosesnya, hasil tidak akan mengkhianati usaha.',
+                      'NO LIMITS, JUST DREAMS',
+                      'Street Art is Freedom',
+                      'STAY HUNGRY. STAY FOOLISH.',
+                    ].map((q, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => onUpdateText(selectedText.id, { text: q })}
+                        className="px-2.5 py-1 rounded-xl bg-gray-100 dark:bg-[#2C2C2E] hover:bg-gray-200 dark:hover:bg-[#3A3A3C] text-gray-700 dark:text-gray-300 text-[11px] font-medium border border-gray-200 dark:border-gray-700 flex-shrink-0 transition-all active:scale-95"
+                      >
+                        {q.length > 25 ? q.substring(0, 25) + '...' : q}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Font Selector List */}
@@ -490,13 +530,13 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
           <div className="space-y-4">
             {/* Custom Image Upload & Presets */}
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Opsi Latar Belakang
               </h3>
 
-              <label className="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-[#1C1C1E] text-xs font-semibold flex items-center gap-1.5 cursor-pointer border border-gray-200 transition-all active:scale-95">
+              <label className="px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-[#2C2C2E] hover:bg-gray-200 dark:hover:bg-[#3A3A3C] text-[#1C1C1E] dark:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer border border-gray-200 dark:border-gray-700 transition-all active:scale-95 shadow-sm">
                 <Upload className="w-3.5 h-3.5 text-[#007AFF]" />
-                <span>Upload Foto</span>
+                <span>Upload Foto/Galeri</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -506,12 +546,50 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
               </label>
             </div>
 
+            {/* Custom Solid Color Picker & Quick Swatches */}
+            <div className="flex items-center gap-2.5 bg-gray-50 dark:bg-[#2C2C2E] p-2.5 rounded-2xl border border-gray-200 dark:border-gray-700">
+              <span className="text-xs text-gray-700 dark:text-gray-300 font-semibold flex-shrink-0">Pilih Warna Latar:</span>
+              <input
+                type="color"
+                value={background.type === 'solid' ? background.value : '#000000'}
+                onChange={(e) =>
+                  onUpdateBackground({
+                    type: 'solid',
+                    value: e.target.value,
+                    overlayOpacity: 0,
+                  })
+                }
+                className="w-8 h-8 rounded-full cursor-pointer bg-transparent border-0 p-0 flex-shrink-0"
+                title="Pilih Warna Kustom"
+              />
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                {['#000000', '#ffffff', '#1c1c1e', '#1e293b', '#0f172a', '#78350f', '#064e3b', '#1e1b4b', '#831843', '#fef3c7'].map((color) => (
+                  <button
+                    key={color}
+                    onClick={() =>
+                      onUpdateBackground({
+                        type: 'solid',
+                        value: color,
+                        overlayOpacity: 0,
+                      })
+                    }
+                    className={`w-6 h-6 rounded-full flex-shrink-0 transition-transform ${
+                      background.type === 'solid' && background.value === color
+                        ? 'scale-110 ring-2 ring-[#007AFF] ring-offset-2'
+                        : 'border border-gray-300 hover:scale-105'
+                    }`}
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
+              </div>
+            </div>
+
             {/* Background Sliders: Dimming & Blur */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-gray-50 p-3 rounded-2xl border border-gray-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-gray-50 dark:bg-[#2C2C2E] p-3 rounded-2xl border border-gray-200 dark:border-gray-700">
               <div>
-                <div className="flex items-center justify-between text-xs text-gray-600 font-semibold mb-1">
+                <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-300 font-semibold mb-1">
                   <span>Redupkan Latar (Overlay Dim)</span>
-                  <span className="text-[#007AFF]">{Math.round(background.overlayOpacity * 100)}%</span>
+                  <span className="text-[#007AFF] font-bold">{Math.round(background.overlayOpacity * 100)}%</span>
                 </div>
                 <input
                   type="range"
@@ -527,9 +605,9 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
               </div>
 
               <div>
-                <div className="flex items-center justify-between text-xs text-gray-600 font-semibold mb-1">
+                <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-300 font-semibold mb-1">
                   <span>Efek Blur Latar</span>
-                  <span className="text-[#007AFF]">{background.blur}px</span>
+                  <span className="text-[#007AFF] font-bold">{background.blur}px</span>
                 </div>
                 <input
                   type="range"
@@ -544,31 +622,58 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
               </div>
             </div>
 
-            {/* Presets Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {BACKGROUND_PRESETS.map((bg) => (
+            {/* Background Presets Category Filter */}
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+              {['Semua', 'Urban Walls', 'Gradients', 'Aesthetic Photos', 'Colors'].map((cat) => (
                 <button
-                  key={bg.id}
-                  onClick={() => onSelectPresetBackground(bg)}
-                  className={`p-2.5 rounded-2xl border text-left transition-all relative overflow-hidden h-20 flex flex-col justify-end ${
-                    background.value === bg.value
-                      ? 'border-[#007AFF] ring-2 ring-[#007AFF] shadow-md'
-                      : 'border-gray-200 hover:border-gray-300'
+                  key={cat}
+                  onClick={() => setBgCategoryFilter(cat)}
+                  className={`px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                    bgCategoryFilter === cat
+                      ? 'bg-[#007AFF] text-white shadow-sm'
+                      : 'bg-gray-100 dark:bg-[#2C2C2E] text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-200'
                   }`}
-                  style={
-                    bg.type === 'solid'
-                      ? { backgroundColor: bg.value }
-                      : bg.type === 'gradient' || bg.type === 'texture'
-                      ? { background: bg.value }
-                      : { backgroundImage: `url(${bg.value})`, backgroundSize: 'cover' }
-                  }
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <span className="relative z-10 text-[11px] font-bold text-white drop-shadow">
-                    {bg.name}
-                  </span>
+                  {cat}
                 </button>
               ))}
+            </div>
+
+            {/* Presets Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {BACKGROUND_PRESETS.filter(
+                (bg) => bgCategoryFilter === 'Semua' || bg.category === bgCategoryFilter
+              ).map((bg) => {
+                const isSelected = background.value === bg.value;
+                return (
+                  <button
+                    key={bg.id}
+                    onClick={() => onSelectPresetBackground(bg)}
+                    className={`p-2.5 rounded-2xl border text-left transition-all relative overflow-hidden h-20 flex flex-col justify-end group active:scale-95 ${
+                      isSelected
+                        ? 'border-[#007AFF] ring-2 ring-[#007AFF] shadow-md'
+                        : 'border-gray-200 dark:border-gray-700 hover:border-gray-400'
+                    }`}
+                    style={
+                      bg.type === 'solid'
+                        ? { backgroundColor: bg.value }
+                        : bg.type === 'gradient' || bg.type === 'texture'
+                        ? { background: bg.value }
+                        : { backgroundImage: `url(${bg.value})`, backgroundSize: 'cover' }
+                    }
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                    {isSelected && (
+                      <div className="absolute top-2 right-2 bg-[#007AFF] text-white p-1 rounded-full shadow-sm">
+                        <Check className="w-3 h-3" />
+                      </div>
+                    )}
+                    <span className="relative z-10 text-[11px] font-bold text-white drop-shadow">
+                      {bg.name}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
