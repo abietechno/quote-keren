@@ -397,7 +397,7 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
                 {/* Selected Controls Overlay Handles */}
                 {isSelected && (
                   <>
-                    {/* Delete Handle (Top-Left) */}
+                    {/* Delete Handle (Top-Right) */}
                     <button
                       onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
@@ -405,41 +405,23 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
                         onDeleteText(t.id);
                       }}
                       title="Hapus Teks"
-                      className="absolute -top-3 -left-3 w-7 h-7 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
+                      className="absolute -top-3 -right-3 w-7 h-7 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
 
-                    {/* Edit Handle (Bottom-Left) */}
+                    {/* Edit Handle (Bottom-Right) */}
                     <button
                       onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
                         e.stopPropagation();
                         onEditTextContent(t);
                       }}
-                      title="Edit Kata-Kata"
-                      className="absolute -bottom-3 -left-3 w-7 h-7 bg-amber-500 hover:bg-amber-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
+                      title="Ubah Kata-Kata"
+                      className="absolute -bottom-3 -right-3 w-7 h-7 bg-[#007AFF] hover:bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
-
-                    {/* Rotate Handle (Top-Right) */}
-                    <div
-                      onPointerDown={(e) => handleTextPointerDown(e, t, 'rotate')}
-                      title="Putar Teks"
-                      className="absolute -top-3 -right-3 w-7 h-7 bg-blue-600 hover:bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-grab active:cursor-grabbing active:scale-90"
-                    >
-                      <RotateCw className="w-3.5 h-3.5" />
-                    </div>
-
-                    {/* Scale Handle (Bottom-Right) */}
-                    <div
-                      onPointerDown={(e) => handleTextPointerDown(e, t, 'scale')}
-                      title="Tarik untuk Ubah Ukuran"
-                      className="absolute -bottom-3 -right-3 w-7 h-7 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-nwse-resize active:scale-90"
-                    >
-                      <Move className="w-3.5 h-3.5" />
-                    </div>
                   </>
                 )}
               </div>

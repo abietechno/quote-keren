@@ -1,7 +1,26 @@
 import { FontOption, TextShadowPreset } from '../types';
 
 export const FONT_OPTIONS: FontOption[] = [
-  // Graffiti & Street
+  // iOS & Modern Clean Fonts
+  { name: 'SF Pro Display (iOS)', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif', category: 'Quotes', previewText: 'SF Pro Display' },
+  { name: 'SF Pro Rounded (iOS)', fontFamily: '"SF Pro Rounded", "SF Compact Rounded", -apple-system, BlinkMacSystemFont, sans-serif', category: 'Quotes', previewText: 'SF Pro Rounded' },
+  { name: 'Google Sans / Product', fontFamily: '"Google Sans", "Product Sans", "Plus Jakarta Sans", sans-serif', category: 'Quotes', previewText: 'Google Sans' },
+  { name: 'New York Serif (iOS)', fontFamily: '"New York", Georgia, "Playfair Display", serif', category: 'Quotes', previewText: 'New York Serif' },
+  { name: 'Plus Jakarta Sans', fontFamily: "'Plus Jakarta Sans', sans-serif", category: 'Quotes', previewText: 'Jakarta Sans' },
+  { name: 'Inter Clean', fontFamily: "'Inter', sans-serif", category: 'Quotes', previewText: 'Inter Modern' },
+  { name: 'Urbanist Geometric', fontFamily: "'Urbanist', sans-serif", category: 'Quotes', previewText: 'URBANIST' },
+
+  // Display & Heavy Statement
+  { name: 'Bebas Neue Bold', fontFamily: "'Bebas Neue', sans-serif", category: 'Display', previewText: 'ALWAYS FORWARD' },
+  { name: 'Bricolage Heavy', fontFamily: "'Bricolage Grotesque', sans-serif", category: 'Display', previewText: 'STATEMENT' },
+  { name: 'Syne Extra Bold', fontFamily: "'Syne', sans-serif", category: 'Display', previewText: 'CREATIVE' },
+  { name: 'Outfit Heavy', fontFamily: "'Outfit', sans-serif", category: 'Display', previewText: 'DISTINCTIVE' },
+  { name: 'Oswald Impact', fontFamily: "'Oswald', sans-serif", category: 'Display', previewText: 'STAY STRONG' },
+  { name: 'Space Grotesk', fontFamily: "'Space Grotesk', sans-serif", category: 'Display', previewText: 'MODERN WAVE' },
+  { name: 'Montserrat Black', fontFamily: "'Montserrat', sans-serif", category: 'Display', previewText: 'NEVER GIVE UP' },
+  { name: 'Shrikhand Pop Art', fontFamily: "'Shrikhand', cursive", category: 'Display', previewText: 'POP VIBES' },
+
+  // Graffiti & Street Art
   { name: 'Sedgwick Graffiti', fontFamily: "'Sedgwick Ave Display', cursive", category: 'Graffiti', previewText: 'STREET ART' },
   { name: 'Bungee Shade', fontFamily: "'Bungee Shade', cursive", category: 'Graffiti', previewText: 'GRAFFITI' },
   { name: 'Bungee Inline', fontFamily: "'Bungee Inline', cursive", category: 'Graffiti', previewText: 'URBAN BEAT' },
@@ -9,25 +28,21 @@ export const FONT_OPTIONS: FontOption[] = [
   { name: 'Rock Salt Marker', fontFamily: "'Rock Salt', cursive", category: 'Graffiti', previewText: 'SPRAY TAG' },
   { name: 'Permanent Marker', fontFamily: "'Permanent Marker', cursive", category: 'Graffiti', previewText: 'WILD STYLE' },
 
-  // Quotes & Elegant Serif
+  // Elegant Serif & Classic Quotes
   { name: 'Playfair Display', fontFamily: "'Playfair Display', serif", category: 'Quotes', previewText: 'Inspirational' },
-  { name: 'Cinzel Royal', fontFamily: "'Cinzel', serif", category: 'Quotes', previewText: 'ELEGANCE' },
-  { name: 'Abril Fatface', fontFamily: "'Abril Fatface', serif", category: 'Quotes', previewText: 'Classic Quote' },
+  { name: 'Lora Editorial', fontFamily: "'Lora', serif", category: 'Serif', previewText: 'Editorial Vibe' },
+  { name: 'Cormorant Garamond', fontFamily: "'Cormorant Garamond', serif", category: 'Serif', previewText: 'Luxury Quote' },
+  { name: 'Cinzel Royal', fontFamily: "'Cinzel', serif", category: 'Serif', previewText: 'ELEGANCE' },
+  { name: 'Abril Fatface', fontFamily: "'Abril Fatface', serif", category: 'Serif', previewText: 'Classic Quote' },
+  { name: 'Special Typewriter', fontFamily: "'Special Elite', cursive", category: 'Serif', previewText: 'Typewriter quote...' },
 
   // Script & Calligraphy
   { name: 'Pacifico Script', fontFamily: "'Pacifico', cursive", category: 'Script', previewText: 'Aesthetic Vibe' },
+  { name: 'Sacramento Elegance', fontFamily: "'Sacramento', cursive", category: 'Script', previewText: 'Soft Calligraphy' },
   { name: 'Caveat Handwritten', fontFamily: "'Caveat', cursive", category: 'Handwriting', previewText: 'Catatan Harian' },
   { name: 'Satisfy Flow', fontFamily: "'Satisfy', cursive", category: 'Script', previewText: 'Pure Emotion' },
   { name: 'Dancing Script', fontFamily: "'Dancing Script', cursive", category: 'Script', previewText: 'Beautiful Words' },
-
-  // Modern Display & Bold
-  { name: 'Bebas Neue Bold', fontFamily: "'Bebas Neue', sans-serif", category: 'Display', previewText: 'ALWAYS FORWARD' },
-  { name: 'Oswald Impact', fontFamily: "'Oswald', sans-serif", category: 'Display', previewText: 'STAY STRONG' },
-  { name: 'Space Grotesk', fontFamily: "'Space Grotesk', sans-serif", category: 'Display', previewText: 'MODERN WAVE' },
-  { name: 'Montserrat Black', fontFamily: "'Montserrat', sans-serif", category: 'Display', previewText: 'NEVER GIVE UP' },
   { name: 'Monoton Retro', fontFamily: "'Monoton', cursive", category: 'Display', previewText: 'RETRO 80S' },
-  { name: 'Special Typewriter', fontFamily: "'Special Elite', cursive", category: 'Serif', previewText: 'Typewriter quote...' },
-  { name: 'Plus Jakarta Sans', fontFamily: "'Plus Jakarta Sans', sans-serif", category: 'Quotes', previewText: 'Minimalist iOS' },
 ];
 
 export const SHADOW_PRESETS: TextShadowPreset[] = [

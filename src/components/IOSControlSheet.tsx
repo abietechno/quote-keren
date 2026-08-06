@@ -624,7 +624,7 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
 
             {/* Background Presets Category Filter */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
-              {['Semua', 'Urban Walls', 'Gradients', 'Aesthetic Photos', 'Colors'].map((cat) => (
+              {['Semua', 'iOS & Glass', 'Urban Walls', 'Gradients', 'Aesthetic Photos', 'Minimalist', 'Colors'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setBgCategoryFilter(cat)}
