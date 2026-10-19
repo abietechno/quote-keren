@@ -67,6 +67,8 @@ export interface TemplatePreset {
 export interface FontOption {
   name: string;
   fontFamily: string;
-  category: 'Graffiti' | 'Quotes' | 'Display' | 'Serif' | 'Script' | 'Handwriting';
+  category: 'iOS & Clean' | 'Graffiti & Street' | 'Display & Heavy' | 'Serif & Luxury' | 'Script & Estetik' | 'Retro & Cyber' | 'Quotes' | 'Display' | 'Serif' | 'Script' | 'Handwriting' | 'Graffiti';
   previewText?: string;
+  badge?: string;
 }
+

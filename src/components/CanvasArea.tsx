@@ -216,8 +216,9 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
     }
     if (background.type === 'gradient' || background.type === 'texture') {
       return {
-        backgroundImage: background.value,
+        background: background.value,
         backgroundSize: 'cover',
+        backgroundPosition: 'center',
       };
     }
     if (background.type === 'unsplash' || background.type === 'image') {
@@ -293,10 +294,10 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
 
           {/* Center Snap Lines */}
           {showSnapV && (
-            <div className="absolute top-0 bottom-0 left-1/2 w-[1px] bg-sky-400/80 z-20 pointer-events-none border-r border-dashed border-sky-300" />
+            <div data-export-ignore="true" className="export-ignore absolute top-0 bottom-0 left-1/2 w-[1px] bg-sky-400/80 z-20 pointer-events-none border-r border-dashed border-sky-300" />
           )}
           {showSnapH && (
-            <div className="absolute left-0 right-0 top-1/2 h-[1px] bg-sky-400/80 z-20 pointer-events-none border-b border-dashed border-sky-300" />
+            <div data-export-ignore="true" className="export-ignore absolute left-0 right-0 top-1/2 h-[1px] bg-sky-400/80 z-20 pointer-events-none border-b border-dashed border-sky-300" />
           )}
 
           {/* Stickers Rendering */}
@@ -320,11 +321,12 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
                 </div>
                 {isSelected && (
                   <button
+                    data-export-ignore="true"
                     onClick={(e) => {
                       e.stopPropagation();
                       onDeleteSticker(st.id);
                     }}
-                    className="absolute -top-3 -right-3 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg"
+                    className="export-ignore absolute -top-3 -right-3 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -399,26 +401,28 @@ export const CanvasArea: React.FC<CanvasAreaProps> = ({
                   <>
                     {/* Delete Handle (Top-Right) */}
                     <button
+                      data-export-ignore="true"
                       onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
                         e.stopPropagation();
                         onDeleteText(t.id);
                       }}
                       title="Hapus Teks"
-                      className="absolute -top-3 -right-3 w-7 h-7 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
+                      className="export-ignore absolute -top-3 -right-3 w-7 h-7 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
 
                     {/* Edit Handle (Bottom-Right) */}
                     <button
+                      data-export-ignore="true"
                       onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
                         e.stopPropagation();
                         onEditTextContent(t);
                       }}
                       title="Ubah Kata-Kata"
-                      className="absolute -bottom-3 -right-3 w-7 h-7 bg-[#007AFF] hover:bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
+                      className="export-ignore absolute -bottom-3 -right-3 w-7 h-7 bg-[#007AFF] hover:bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-white cursor-pointer active:scale-90"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>

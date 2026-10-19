@@ -9,7 +9,7 @@ export interface BackgroundOption {
 }
 
 export const BACKGROUND_PRESETS: BackgroundOption[] = [
-  // iOS 18 & Glass Aesthetics
+  // ================= 1. iOS 18 & Glass Aesthetics =================
   {
     id: 'ios-mesh-aura',
     name: 'iOS 18 Mesh Aura',
@@ -32,14 +32,42 @@ export const BACKGROUND_PRESETS: BackgroundOption[] = [
     category: 'iOS & Glass',
   },
   {
+    id: 'ios-liquid-indigo',
+    name: 'iOS Liquid Indigo',
+    type: 'gradient',
+    value: 'radial-gradient(circle at 80% 20%, #6366f1 0%, transparent 40%), radial-gradient(circle at 20% 80%, #a855f7 0%, transparent 45%), #09090b',
+    category: 'iOS & Glass',
+  },
+  {
     id: 'ios-midnight-glass',
     name: 'iOS Dark Obsidian',
     type: 'gradient',
     value: 'linear-gradient(180deg, #18181b 0%, #09090b 50%, #000000 100%)',
     category: 'iOS & Glass',
   },
+  {
+    id: 'ios-desert-titanium',
+    name: 'Desert Titanium Glow',
+    type: 'gradient',
+    value: 'radial-gradient(circle at 50% 30%, #a88a6d 0%, #3f3126 60%, #14100d 100%)',
+    category: 'iOS & Glass',
+  },
+  {
+    id: 'ios-frost-glass',
+    name: 'Frosted Chrome Glass',
+    type: 'gradient',
+    value: 'linear-gradient(135deg, #334155 0%, #1e293b 50%, #0f172a 100%)',
+    category: 'iOS & Glass',
+  },
+  {
+    id: 'ios-neon-flux',
+    name: 'Dynamic Neon Flux',
+    type: 'gradient',
+    value: 'radial-gradient(at 0% 100%, #06b6d4 0px, transparent 50%), radial-gradient(at 100% 0%, #d946ef 0px, transparent 50%), #030712',
+    category: 'iOS & Glass',
+  },
 
-  // Urban Wall & Graffiti Textures
+  // ================= 2. Urban Walls & Street Art =================
   {
     id: 'brick-dark',
     name: 'Tembok Bata Gelap',
@@ -79,8 +107,22 @@ export const BACKGROUND_PRESETS: BackgroundOption[] = [
     value: 'radial-gradient(circle at 50% 50%, #3f3f46 0%, #18181b 70%, #09090b 100%)',
     category: 'Urban Walls',
   },
+  {
+    id: 'brick-brooklyn',
+    name: 'Bata Merah Urban',
+    type: 'texture',
+    value: 'radial-gradient(ellipse at center, #451a1a 0%, #1c0a0a 100%)',
+    category: 'Urban Walls',
+  },
+  {
+    id: 'dark-metal-plate',
+    name: 'Plat Besi Industrial',
+    type: 'texture',
+    value: 'linear-gradient(45deg, #18181b 25%, #27272a 50%, #18181b 75%)',
+    category: 'Urban Walls',
+  },
 
-  // Rich Gradients
+  // ================= 3. Rich & Vibrant Gradients =================
   {
     id: 'grad-sunset',
     name: 'Sunset Orange',
@@ -125,36 +167,41 @@ export const BACKGROUND_PRESETS: BackgroundOption[] = [
   },
   {
     id: 'grad-acid-lime',
-    name: 'Acid Lime',
+    name: 'Acid Lime & Emerald',
     type: 'gradient',
     value: 'linear-gradient(135deg, #10b981 0%, #84cc16 100%)',
     category: 'Gradients',
   },
+  {
+    id: 'grad-tokyo-magenta',
+    name: 'Tokyo Magenta Cyan',
+    type: 'gradient',
+    value: 'linear-gradient(135deg, #ec4899 0%, #3b82f6 100%)',
+    category: 'Gradients',
+  },
+  {
+    id: 'grad-velvet-noir',
+    name: 'Velvet Noir & Wine',
+    type: 'gradient',
+    value: 'linear-gradient(135deg, #4c0519 0%, #1e1b4b 100%)',
+    category: 'Gradients',
+  },
+  {
+    id: 'grad-holographic',
+    name: 'Holographic Prism',
+    type: 'gradient',
+    value: 'linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%)',
+    category: 'Gradients',
+  },
+  {
+    id: 'grad-pacific-deep',
+    name: 'Pacific Deep Abyss',
+    type: 'gradient',
+    value: 'linear-gradient(180deg, #0369a1 0%, #082f49 60%, #020617 100%)',
+    category: 'Gradients',
+  },
 
-  // Minimalist & Textures
-  {
-    id: 'minimal-paper-warm',
-    name: 'Kertas Vintage Warm',
-    type: 'texture',
-    value: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
-    category: 'Minimalist',
-  },
-  {
-    id: 'minimal-marble-dark',
-    name: 'Dark Marble Noir',
-    type: 'texture',
-    value: 'radial-gradient(circle at top left, #27272a 0%, #09090b 100%)',
-    category: 'Minimalist',
-  },
-  {
-    id: 'minimal-sand-beige',
-    name: 'Aesthetic Beige',
-    type: 'texture',
-    value: 'linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%)',
-    category: 'Minimalist',
-  },
-
-  // Unsplash High-Res Aesthetic Photos
+  // ================= 4. Aesthetic & Cinematic Photos =================
   {
     id: 'unsplash-graffiti-1',
     name: 'Wall Spray Art',
@@ -209,8 +256,88 @@ export const BACKGROUND_PRESETS: BackgroundOption[] = [
     overlayColor: '#000000',
     overlayOpacity: 0.2,
   },
+  {
+    id: 'unsplash-cyber-alley',
+    name: 'Tokyo Neon Alley',
+    type: 'unsplash',
+    value: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000&auto=format&fit=crop',
+    category: 'Aesthetic Photos',
+    overlayColor: '#000000',
+    overlayOpacity: 0.35,
+  },
+  {
+    id: 'unsplash-moody-waves',
+    name: 'Moody Ocean Waves',
+    type: 'unsplash',
+    value: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop',
+    category: 'Aesthetic Photos',
+    overlayColor: '#000000',
+    overlayOpacity: 0.3,
+  },
+  {
+    id: 'unsplash-desert-dune',
+    name: 'Golden Desert Dusk',
+    type: 'unsplash',
+    value: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1000&auto=format&fit=crop',
+    category: 'Aesthetic Photos',
+    overlayColor: '#000000',
+    overlayOpacity: 0.2,
+  },
+  {
+    id: 'unsplash-rain-window',
+    name: 'Rainy Cafe Glass',
+    type: 'unsplash',
+    value: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1000&auto=format&fit=crop',
+    category: 'Aesthetic Photos',
+    overlayColor: '#000000',
+    overlayOpacity: 0.3,
+  },
 
-  // Solid Colors
+  // ================= 5. Minimalist & Textures =================
+  {
+    id: 'minimal-paper-warm',
+    name: 'Kertas Vintage Warm',
+    type: 'texture',
+    value: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+    category: 'Minimalist',
+  },
+  {
+    id: 'minimal-marble-dark',
+    name: 'Dark Marble Noir',
+    type: 'texture',
+    value: 'radial-gradient(circle at top left, #27272a 0%, #09090b 100%)',
+    category: 'Minimalist',
+  },
+  {
+    id: 'minimal-sand-beige',
+    name: 'Aesthetic Beige',
+    type: 'texture',
+    value: 'linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%)',
+    category: 'Minimalist',
+  },
+  {
+    id: 'minimal-japanese-washi',
+    name: 'Japanese Washi Soft',
+    type: 'texture',
+    value: 'linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%)',
+    category: 'Minimalist',
+  },
+  {
+    id: 'minimal-charcoal-studio',
+    name: 'Charcoal Studio Smooth',
+    type: 'texture',
+    value: 'radial-gradient(ellipse at 50% 40%, #1f2937 0%, #111827 100%)',
+    category: 'Minimalist',
+  },
+  {
+    id: 'minimal-kraft-sepia',
+    name: 'Vintage Kraft Sepia',
+    type: 'texture',
+    value: 'linear-gradient(135deg, #eed8ae 0%, #c4a47c 100%)',
+    category: 'Minimalist',
+  },
+
+  // ================= 6. Solid Colors =================
   { id: 'solid-black', name: 'Hitam Pekat', type: 'solid', value: '#0a0a0c', category: 'Colors' },
   { id: 'solid-white', name: 'Putih Bersih', type: 'solid', value: '#ffffff', category: 'Colors' },
   { id: 'solid-slate', name: 'Slate iOS', type: 'solid', value: '#1e293b', category: 'Colors' },
@@ -218,4 +345,8 @@ export const BACKGROUND_PRESETS: BackgroundOption[] = [
   { id: 'solid-emerald', name: 'Deep Emerald', type: 'solid', value: '#064e3b', category: 'Colors' },
   { id: 'solid-crimson', name: 'Merah Crimson', type: 'solid', value: '#881337', category: 'Colors' },
   { id: 'solid-indigo', name: 'Royal Indigo', type: 'solid', value: '#1e1b4b', category: 'Colors' },
+  { id: 'solid-titanium', name: 'Natural Titanium', type: 'solid', value: '#8e8e93', category: 'Colors' },
+  { id: 'solid-cyber-yellow', name: 'Cyber Yellow', type: 'solid', value: '#eab308', category: 'Colors' },
+  { id: 'solid-velvet-rose', name: 'Moody Dark Rose', type: 'solid', value: '#4c0519', category: 'Colors' },
 ];
+

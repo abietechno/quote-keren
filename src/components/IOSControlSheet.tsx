@@ -95,6 +95,7 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
   };
 
   const [bgCategoryFilter, setBgCategoryFilter] = useState<string>('Semua');
+  const [fontCategoryFilter, setFontCategoryFilter] = useState<string>('Semua');
 
   return (
     <div className="w-full bg-white/95 dark:bg-[#1C1C1E]/95 backdrop-blur-2xl border-t border-[#E5E5EA] dark:border-[#2C2C2E] shadow-2xl transition-all pb-safe rounded-t-[28px] sm:rounded-t-[36px]">
@@ -287,26 +288,73 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
 
                 {/* Font Selector List */}
                 <div>
-                  <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block mb-2">
-                    Gaya Font (Google Fonts)
-                  </label>
-                  <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
-                    {FONT_OPTIONS.map((font) => (
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+                      <Type className="w-3.5 h-3.5 text-[#007AFF]" />
+                      <span>Koleksi Font ({FONT_OPTIONS.length} Pilihan Unik)</span>
+                    </label>
+                  </div>
+
+                  {/* Font Categories */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 mb-2">
+                    {[
+                      'Semua',
+                      'iOS & Clean',
+                      'Display & Heavy',
+                      'Graffiti & Street',
+                      'Retro & Cyber',
+                      'Serif & Luxury',
+                      'Script & Estetik',
+                    ].map((cat) => (
                       <button
-                        key={font.name}
-                        onClick={() => onUpdateText(selectedText.id, { fontFamily: font.fontFamily })}
-                        className={`px-3 py-2 rounded-xl text-xs font-medium flex-shrink-0 border transition-all ${
-                          selectedText.fontFamily === font.fontFamily
-                            ? 'bg-blue-50 border-[#007AFF] text-[#007AFF] ring-1 ring-[#007AFF]'
-                            : 'bg-gray-50 border-gray-200 text-[#1C1C1E] hover:border-gray-300'
+                        key={cat}
+                        onClick={() => setFontCategoryFilter(cat)}
+                        className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold whitespace-nowrap transition-all ${
+                          fontCategoryFilter === cat
+                            ? 'bg-[#007AFF] text-white shadow-sm'
+                            : 'bg-gray-100 dark:bg-[#2C2C2E] text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-[#3A3A3C]'
                         }`}
                       >
-                        <span style={{ fontFamily: font.fontFamily }} className="text-sm block mb-0.5">
-                          {font.previewText || 'Sample'}
-                        </span>
-                        <span className="text-[10px] text-gray-500 font-sans block">{font.name}</span>
+                        {cat}
                       </button>
                     ))}
+                  </div>
+
+                  {/* Font List Horizontal Scroll */}
+                  <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                    {FONT_OPTIONS.filter(
+                      (f) => fontCategoryFilter === 'Semua' || f.category === fontCategoryFilter
+                    ).map((font) => {
+                      const isSelected = selectedText.fontFamily === font.fontFamily;
+                      return (
+                        <button
+                          key={font.name}
+                          onClick={() => onUpdateText(selectedText.id, { fontFamily: font.fontFamily })}
+                          className={`px-3 py-2 rounded-2xl text-xs font-medium flex-shrink-0 border transition-all text-left relative group active:scale-95 min-w-[130px] ${
+                            isSelected
+                              ? 'bg-blue-50 dark:bg-blue-950/40 border-[#007AFF] text-[#007AFF] ring-1 ring-[#007AFF] shadow-sm'
+                              : 'bg-gray-50 dark:bg-[#2C2C2E] border-gray-200 dark:border-gray-700 text-[#1C1C1E] dark:text-white hover:border-gray-300'
+                          }`}
+                        >
+                          {font.badge && (
+                            <span className="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 text-[9px] font-black uppercase rounded-full bg-[#007AFF] text-white shadow-sm ring-1 ring-white dark:ring-black">
+                              {font.badge}
+                            </span>
+                          )}
+                          <span style={{ fontFamily: font.fontFamily }} className="text-sm font-medium block mb-1 truncate pr-2">
+                            {font.previewText || 'Sample'}
+                          </span>
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="text-[10px] text-gray-500 dark:text-gray-400 font-sans truncate max-w-[100px] block">
+                              {font.name}
+                            </span>
+                            {isSelected && (
+                              <Check className="w-3 h-3 text-[#007AFF] flex-shrink-0" />
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -624,19 +672,27 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
 
             {/* Background Presets Category Filter */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
-              {['Semua', 'iOS & Glass', 'Urban Walls', 'Gradients', 'Aesthetic Photos', 'Minimalist', 'Colors'].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setBgCategoryFilter(cat)}
-                  className={`px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                    bgCategoryFilter === cat
-                      ? 'bg-[#007AFF] text-white shadow-sm'
-                      : 'bg-gray-100 dark:bg-[#2C2C2E] text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+              {['Semua', 'iOS & Glass', 'Urban Walls', 'Gradients', 'Aesthetic Photos', 'Minimalist', 'Colors'].map((cat) => {
+                const count = cat === 'Semua' ? BACKGROUND_PRESETS.length : BACKGROUND_PRESETS.filter((b) => b.category === cat).length;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setBgCategoryFilter(cat)}
+                    className={`px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                      bgCategoryFilter === cat
+                        ? 'bg-[#007AFF] text-white shadow-sm'
+                        : 'bg-gray-100 dark:bg-[#2C2C2E] text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <span>{cat}</span>
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                      bgCategoryFilter === cat ? 'bg-white/20 text-white' : 'bg-black/5 dark:bg-white/10 text-gray-500'
+                    }`}>
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Presets Grid */}
@@ -658,18 +714,21 @@ export const IOSControlSheet: React.FC<IOSControlSheetProps> = ({
                       bg.type === 'solid'
                         ? { backgroundColor: bg.value }
                         : bg.type === 'gradient' || bg.type === 'texture'
-                        ? { background: bg.value }
-                        : { backgroundImage: `url(${bg.value})`, backgroundSize: 'cover' }
+                        ? { background: bg.value, backgroundSize: 'cover', backgroundPosition: 'center' }
+                        : { backgroundImage: `url(${bg.value})`, backgroundSize: 'cover', backgroundPosition: 'center' }
                     }
                   >
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                     {isSelected && (
-                      <div className="absolute top-2 right-2 bg-[#007AFF] text-white p-1 rounded-full shadow-sm">
+                      <div className="absolute top-2 right-2 bg-[#007AFF] text-white p-1 rounded-full shadow-sm z-10">
                         <Check className="w-3 h-3" />
                       </div>
                     )}
-                    <span className="relative z-10 text-[11px] font-bold text-white drop-shadow">
+                    <span className="relative z-10 text-[11px] font-bold text-white drop-shadow line-clamp-1">
                       {bg.name}
+                    </span>
+                    <span className="relative z-10 text-[9px] text-gray-300/90 font-medium">
+                      {bg.category}
                     </span>
                   </button>
                 );

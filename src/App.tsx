@@ -176,7 +176,11 @@ export default function App() {
         aspectRatio={aspectRatio}
         onAspectRatioChange={setAspectRatio}
         onReset={handleResetCanvas}
-        onExport={() => setIsExportModalOpen(true)}
+        onExport={() => {
+          setSelectedTextId(null);
+          setSelectedStickerId(null);
+          setIsExportModalOpen(true);
+        }}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
         isDeviceFrame={isDeviceFrame}
@@ -247,6 +251,10 @@ export default function App() {
       <ExportModal
         isOpen={isExportModalOpen}
         canvasRef={canvasRef}
+        texts={texts}
+        background={background}
+        stickers={stickers}
+        aspectRatio={aspectRatio}
         onClose={() => setIsExportModalOpen(false)}
       />
 
